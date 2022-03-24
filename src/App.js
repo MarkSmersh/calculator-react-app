@@ -10,16 +10,18 @@ function App() {
   const [operator, setOperator] = useState(null)
 
   const Get = () => {
-    var result
+    var result, prevNum, Num
+    prevNum = parseInt(prevNumber, 10)
+    Num = parseInt(number, 10)
     switch (operator) {
-      case '+': result = parseInt(prevNumber, 10) + parseInt(number, 10); break
-      case '-': result = prevNumber - number; break
-      case '*': result = prevNumber * number; break
-      case '/': result = prevNumber / number; break
+      case '+': result = prevNum + Num; break
+      case '-': result = prevNum - Num; break
+      case '*': result = prevNum * Num; break
+      case '/': result = prevNum / Num; break
       default: break
     }
     result = result.toString()
-    if (result.toString().length > 13) result = parseInt(result.toString().slice(0, 14), 10)
+    if (result.length > 13) result = parseFloat(result.slice(0, 14), 10)
     setNumber(result)
     setPrevNumber("0")
     setOperator(null)
@@ -66,7 +68,7 @@ function App() {
   return (
     <div className="App">
       <div className='Calculator'>
-        <Display number={number} prevNumber={prevNumber}/>
+        <Display number={number} prevNumber={prevNumber} operator={operator}/>
         <div className='Button-Container'>
           <div className='Numeric-Buttons'>
             {numbers.map((value) => { return <Button key={value} type={"Num"} value={value} onClick={Calcalute}/>})}
